@@ -29,7 +29,7 @@
     <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid">Submit</button>
   </form>
 
-  <div *ngIf="submissionMessage" class="alert alert-success mt-3">
-    {{ submissionMessage }}
+ <div *ngIf="submissionMessage && submittedName" class="alert alert-success mt-3">
+    Thank you, {{ submittedName | uppercase|reverse }}! Your message has been submitted successfully!
   </div>
 </div>

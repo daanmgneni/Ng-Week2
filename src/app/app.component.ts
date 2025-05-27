@@ -9,7 +9,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component'; //
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
+  
 
     CommonModule,
 
