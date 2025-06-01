@@ -1,35 +1,35 @@
 <div class="contact-form-container">
-  <h2>Contact Us</h2>
-  <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm.value)">
+  <h2>Reactive Contact Us</h2>
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" id="name" name="name" class="form-control" ngModel required>
-      <div class="error" *ngIf="contactForm.controls['name']?.invalid && (contactForm.controls['name']?.dirty || contactForm.controls['name']?.touched)">
+      <input type="text" id="name" class="form-control" formControlName="name" required>
+      <div class="error" *ngIf="nameControl?.invalid && (nameControl?.dirty || nameControl?.touched)">
         Name is required.
       </div>
     </div>
 
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" class="form-control" ngModel required email>
-      <div class="error" *ngIf="contactForm.controls['email']?.invalid && (contactForm.controls['email']?.dirty || contactForm.controls['email']?.touched)">
-        <div *ngIf="contactForm.controls['email']?.errors?.['required']">Email is required.</div>
-        <div *ngIf="contactForm.controls['email']?.errors?.['email']">Please enter a valid email address.</div>
+      <input type="email" id="email" class="form-control" formControlName="email" required email>
+      <div class="error" *ngIf="emailControl?.invalid && (emailControl?.dirty || emailControl?.touched)">
+        <div *ngIf="emailControl?.errors?.['required']">Email is required.</div>
+        <div *ngIf="emailControl?.errors?.['email']">Please enter a valid email address.</div>
       </div>
     </div>
 
     <div class="form-group">
       <label for="message">Message</label>
-      <textarea id="message" name="message" class="form-control" rows="5" ngModel required></textarea>
-      <div class="error" *ngIf="contactForm.controls['message']?.invalid && (contactForm.controls['message']?.dirty || contactForm.controls['message']?.touched)">
+      <textarea id="message" rows="5" class="form-control" formControlName="message" required></textarea>
+      <div class="error" *ngIf="messageControl?.invalid && (messageControl?.dirty || messageControl?.touched)">
         Message is required.
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Submit</button>
   </form>
 
- <div *ngIf="submissionMessage && submittedName" class="alert alert-success mt-3">
-    Thank you, {{ submittedName | uppercase|reverse }}! Your message has been submitted successfully!
+  <div *ngIf="submissionMessage" class="alert alert-success mt-3">
+    {{ submissionMessage }}
   </div>
 </div>
